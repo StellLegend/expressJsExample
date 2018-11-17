@@ -14,10 +14,20 @@ app.get('/', (req, res) => {
 });
 app.get('/users', (req, res) => {
     res.render('users/index', {
-        user: users
+        users: users
     })
 });
-
+app.get('/users/search', (req, res) => {
+    var q = req.query.q; //get q attribute in url
+    var matchUser = users.filter((user) => {//find q in users list
+        return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+    });
+    res.render('users/index', {
+        users: matchUser,
+        input: q
+    });
+    console.log(req.query)
+});
 
 app.listen(port, () => 
     console.log(`Example app listening on port ${port}`));

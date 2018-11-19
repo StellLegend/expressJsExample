@@ -4,6 +4,12 @@ const port = 3000;
 
 var bodyParser = require('body-parser');
 
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+
+const adapter = new FileSync('db.json')
+const db = low(adapter)
+
 app.set('view engine', 'pug');
 app.set('views', './views');
 

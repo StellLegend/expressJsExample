@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 4000;
 
 var bodyParser = require('body-parser');
 
@@ -19,26 +19,34 @@ app.set('views', './views');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-var users = [
-    {id: 1, name: 'Phu'},
-    {id: 2, name: 'Huy'}
-];
 app.get('/', (req, res) => {
-    res.render('index', {name: 'Phu'})
+    res.render('index', {
+        name: 'Phu'
+    });
 });
 app.get('/users', (req, res) => {
     res.render('users/index', {
-        users: users
+        users: db.get('users').value()//get value from db.json
     })
 });
 app.get('/users/search', (req, res) => {
     var q = req.query.q; //get q attribute in url
-    var matchUser = users.filter((user) => {//find q in users list
-        return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+    var matchUser = [];
+    db.get('users').value().forEach(element => {
+        if(element.name.toLowerCase().indexOf(q.toLowerCase()) !== -1){
+            matchUser.push(element);
+        }
     });
+    // var users = [
+    //     {id: 1, name: 'Phu'},
+    //     {id: 2, name: 'Huy'}
+    // ];
+    // var FF = users.filter((user) => {//find q in users list
+    //     return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+    // });
+    //console.log(matchUser);
     res.render('users/index', {
-        users: matchUser,
+        users: matchUser,// input : array
         input: q
     });
     console.log(req.query)
@@ -47,7 +55,8 @@ app.get('/users/create', (req, res) => {
     res.render('users/create');
 });
 app.post('/users/create', (req, res) => {
-    users.push({id: users.length, name: req.body.add});
+    db.get('users').push({ name: req.body.add})
+        .write();
     console.log(req.body.add);
     res.redirect('/users');
 });

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express();
+const shortid = require('shortid');
 
 const db = require('../db');
 router.get('/', (req, res) => {
@@ -24,12 +25,17 @@ router.get('/create', (req, res) => {
     res.render('users/create');
 });
 router.get('/:id', (req, res) => {
-    var userID = parseInt(req.params.id);
+    var userID = req.params.id;
     var userInfo = db.get('users').find({id: userID}).value();
     console.log(userInfo);
     res.render('users/viewUser', {
         info: userInfo.name
     });
 });
+router.post('/create', (req, res) => {
+    req.body.id = shortid.generate();
+    db.get('users').push(req.body).write();
+    res.redirect('/users');
+});
 
-module.exports =    router;
+module.exports = router;

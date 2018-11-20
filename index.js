@@ -31,20 +31,11 @@ app.get('/users', (req, res) => {
 });
 app.get('/users/search', (req, res) => {
     var q = req.query.q; //get q attribute in url
-    var matchUser = [];
-    db.get('users').value().forEach(element => {
-        if(element.name.toLowerCase().indexOf(q.toLowerCase()) !== -1){
-            matchUser.push(element);
-        }
+    
+    var matchUser = db.get('users').value().filter((user) => {//find q in users list
+        return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
     });
-    // var users = [
-    //     {id: 1, name: 'Phu'},
-    //     {id: 2, name: 'Huy'}
-    // ];
-    // var FF = users.filter((user) => {//find q in users list
-    //     return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
-    // });
-    //console.log(matchUser);
+    console.log(matchUser);
     res.render('users/index', {
         users: matchUser,// input : array
         input: q
@@ -53,6 +44,14 @@ app.get('/users/search', (req, res) => {
 });
 app.get('/users/create', (req, res) => {
     res.render('users/create');
+});
+app.get('/users/:id', (req, res) => {
+    var userID = parseInt(req.params.id);
+    var userInfo = db.get('users').find({id: userID}).value();
+    console.log(userInfo);
+    res.render('users/viewUser', {
+        info: userInfo.name
+    });
 });
 app.post('/users/create', (req, res) => {
     db.get('users').push({ name: req.body.add})

@@ -1,9 +1,11 @@
 {
   "users": [
     {
+      "id": 1,
       "name": "Thinh"
     },
     {
+      "id": 2,
       "name": "Phu"
     }
   ]

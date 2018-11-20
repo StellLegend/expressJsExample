@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express();
 const shortid = require('shortid');
+var bodyParser = require('body-parser');
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require('../db');
 router.get('/', (req, res) => {

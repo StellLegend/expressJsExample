@@ -2,7 +2,11 @@ extends ../layout/common
 
 block content
     h1 Create user
-    form(action="/users/create", method="POST", class="d-flex")
-        label Name
-        input(type="text", name="name", class="form-control")
-        button(class="btn btn-primary ml-3") Add
+    form(action="/users/create", method="POST")
+        .form-group
+            label(for='exampleInputEmail1') Name
+            input#exampleInputEmail1.form-control(type='text',name="name", aria-describedby='emailHelp', placeholder='Enter Name')
+        .form-group
+            label(for='exampleInputPassword1') Phone
+            input#exampleInputPassword1.form-control(type='text', name="phone", placeholder='Phone')
+        button.btn.btn-primary(type='submit') Submit

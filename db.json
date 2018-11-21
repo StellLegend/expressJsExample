@@ -1,20 +1,14 @@
 {
   "users": [
     {
-      "name": "Ha",
-      "id": "ITmuJm_2b"
+      "name": "Huy",
+      "phone": "01297637434",
+      "id": "Dglht0Ykp"
     },
     {
       "name": "Thinh",
-      "id": "tR5L2piQY"
-    },
-    {
-      "name": "Hau",
-      "id": "xV5TDvp95"
-    },
-    {
-      "name": "Quang",
-      "id": "aYNAnxFtD"
+      "phone": "0978898455",
+      "id": "ZOgZIpRVc"
     }
   ]
 }

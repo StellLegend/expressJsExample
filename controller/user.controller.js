@@ -29,6 +29,14 @@ module.exports.getID = (req, res) => {
 };
 module.exports.postCreate = (req, res) => {
     req.body.id = shortid.generate();
+    var errors = "Name or Phone are required";
+    if(!req.body.name || !req.body.phone){
+        res.render('users/create', {
+            values: req.body,
+            error: errors
+        });
+        return;
+    }
     db.get('users').push(req.body).write();
     res.redirect('/users');
 };

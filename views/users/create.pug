@@ -2,11 +2,13 @@ extends ../layout/common
 
 block content
     h1 Create user
+    if error
+        .alert.alert-danger= error
     form(action="/users/create", method="POST")
         .form-group
             label(for='exampleInputEmail1') Name
-            input#exampleInputEmail1.form-control(type='text',name="name", aria-describedby='emailHelp', placeholder='Enter Name')
+            input#exampleInputEmail1.form-control(type='text',name="name",value= values ? values.name : "", aria-describedby='emailHelp', placeholder='Enter Name')
         .form-group
             label(for='exampleInputPassword1') Phone
-            input#exampleInputPassword1.form-control(type='text', name="phone", placeholder='Phone')
+            input#exampleInputPassword1.form-control(type='text', name="phone", value= values ? values.phone : "", placeholder='Phone')
         button.btn.btn-primary(type='submit') Submit

@@ -1,25 +1,11 @@
 {
   "users": [
     {
-      "name": "Huy",
-      "phone": "01297637434",
-      "id": "Dglht0Ykp",
-      "email": "info3@dog.com",
-      "password": 123123
-    },
-    {
       "name": "Thinh",
       "phone": "0978898455",
       "id": "ZOgZIpRVc",
       "email": "info1@dog.com",
-      "password": 123456
-    },
-    {
-      "name": "Phu",
-      "phone": "01297637434",
-      "id": "gT9W2mOU2",
-      "email": "info2@dog.com",
-      "password": 1510
+      "password": "6ac1e56bc78f031059be7be854522c4c"
     }
   ]
 }

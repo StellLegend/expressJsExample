@@ -2,11 +2,10 @@ var express = require('express');
 var router = express();
 
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
-router.use(cookieParser());
+
 
 const controller = require('../controller/user.controller');
 

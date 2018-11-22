@@ -15,6 +15,10 @@ html
                                 span.sr-only (current)
                         li.nav-item
                             a.nav-link(href='/users') List
+                        li.nav-item
+                            a.nav-link(href='/users')
+                                if user
+                                    p= user.name
                     form.form-inline.my-2.my-lg-0(action="/users/search", method="GET")
                         input.form-control.mr-sm-2(type='search', name="q", value=input, placeholder='Search', aria-label='Search')
                         button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search

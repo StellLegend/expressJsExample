@@ -14,5 +14,6 @@ module.exports.loginAuth = (req, res, next) => {
         return;
     }
 
+    res.locals.user = idUser;
     next();
 };

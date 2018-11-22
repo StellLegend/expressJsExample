@@ -1,0 +1,14 @@
+extends ../layout/common 
+
+block content
+    h1 Login
+    if errors
+        .alert.alert-danger= errors
+    form(method="POST")
+        .form-group
+            label(for='exampleInputEmail1') Email
+            input#exampleInputEmail1.form-control(type='email',name="email",value= values ? values.email : "", aria-describedby='emailHelp', placeholder='Enter Mail')
+        .form-group
+            label(for='exampleInputPassword1') Password
+            input#exampleInputPassword1.form-control(type='password', name="password", value= values ? values.password : "", placeholder='Password')
+        button.btn.btn-primary(type='submit') Login

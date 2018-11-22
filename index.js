@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const port = 4000;
@@ -11,7 +13,8 @@ const loginRoute = require('./route/login.route');
 app.set('view engine', 'pug');
 app.set('views', './views');
 
-app.use(cookieParser('sdagsdfsg'));
+console.log(process.env.COOKIE_SECRET);
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use('', homeRoute);
 app.use('/users', userRoute);
 app.use('/auth', loginRoute);

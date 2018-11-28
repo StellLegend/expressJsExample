@@ -1,0 +1,33 @@
+extends ../layout/common 
+
+block content
+    .container-fluid
+        .d-flex.justify-content-between 
+            h1 Products
+            form.form-inline.my-2.my-lg-0
+                input.form-control.mr-sm-2(type='search', placeholder='Search product')
+                button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+
+        .row.mt-3
+            each product in products
+                .col-sm-3
+                    .card.mt-3
+                        img.card-img-top(src= product.image, alt='Image')
+                        .card-body
+                            h5.card-title= product.name
+                                p.card-text= product.desciption
+                                a.btn.btn-primary(href='#') Buy
+        form(action="", method="get").d-flex.justify-content-center.mt-5                       
+            nav.d-flex.align-self-center(aria-label='Page navigation example')
+                    ul.pagination
+                        li.page-item
+                        button.page-link(name='page', value= num-1) Previous
+                        li.page-item
+                        button.page-link(name='page', value= num)= num
+                        li.page-item
+                        button.page-link(name='page', value= num+1)= num+1
+                        li.page-item
+                        button.page-link(name='page', value= num+1)= num+2
+                        li.page-item
+                        button.page-link(name='page', value= num+1) Next
+

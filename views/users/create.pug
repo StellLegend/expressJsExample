@@ -4,11 +4,17 @@ block content
     h1 Create user
     if error
         .alert.alert-danger= error
-    form(action="/users/create", method="POST")
+    form(action="/users/create", method="POST", enctype="multipart/form-data")
         .form-group
             label(for='exampleInputEmail1') Name
             input#exampleInputEmail1.form-control(type='text',name="name",value= values ? values.name : "", aria-describedby='emailHelp', placeholder='Enter Name')
         .form-group
             label(for='exampleInputPassword1') Phone
             input#exampleInputPassword1.form-control(type='text', name="phone", value= values ? values.phone : "", placeholder='Phone')
+        .input-group.mb-3
+            .input-group-prepend
+                span#inputGroupFileAddon01.input-group-text Upload
+            .custom-file
+                input#inputGroupFile01.custom-file-input(type='file', aria-describedby='inputGroupFileAddon01')
+                label.custom-file-label(for='inputGroupFile01') Choose file
         button.btn.btn-primary(type='submit') Submit

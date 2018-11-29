@@ -5,13 +5,16 @@ block content
     a.btn.btn-primary(href="/users/create") New
     table.table.mt-3
         thead
-            tr
+            tr  
+                th(scope='col') Avatar
                 th(scope='col') Name
                 th(scope='col') Phone
                 th(scope='col') Actions
         tbody
             each user in users
-                tr
+                tr  
+                    td
+                        img(src=user.avatar, width='64')
                     td= user.name
                     td= user.phone
                     td

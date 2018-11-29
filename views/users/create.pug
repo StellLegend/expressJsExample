@@ -12,9 +12,7 @@ block content
             label(for='exampleInputPassword1') Phone
             input#exampleInputPassword1.form-control(type='text', name="phone", value= values ? values.phone : "", placeholder='Phone')
         .input-group.mb-3
-            .input-group-prepend
-                span#inputGroupFileAddon01.input-group-text Upload
             .custom-file
-                input#inputGroupFile01.custom-file-input(type='file', aria-describedby='inputGroupFileAddon01')
-                label.custom-file-label(for='inputGroupFile01') Choose file
+                input#avatar.custom-file-input(type='file', aria-describedby='inputGroupFileAddon01', name='avatar')
+                label.custom-file-label(for='avatar') Choose file
         button.btn.btn-primary(type='submit') Submit

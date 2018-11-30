@@ -315,5 +315,14 @@
       "image": "https://loremflickr.com/320/240",
       "desciption": "aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut"
     }
+  ],
+  "sessions": [
+    {
+      "id": "mHWsL3ZON",
+      "cart": {
+        "c4353a8b-bf4e-42f3-9383-92dd5f213609": 2,
+        "000d2118-4d36-4e6d-b72f-1c041ecca65e": 2
+      }
+    }
   ]
 }

@@ -15,8 +15,8 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 const controller = require('../controller/user.controller');
 
-const authMiddleware = require('../middleware/loginmiddleware');
-const userMiddleware = require('../validate/user.middleware');
+const authMiddleware = require('../middleware/login.middleware');
+const userMiddleware = require('../validate/user.validate');
 
 router.get('/', authMiddleware.loginAuth, controller.index);
 router.get('/search', controller.search);

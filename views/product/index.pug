@@ -10,13 +10,13 @@ block content
 
         .row.mt-3
             each product in products
-                .col-sm-3
+                .col-sm-3.col-md-4.col-lg-3
                     .card.mt-3
                         img.card-img-top(src= product.image, alt='Image')
                         .card-body
                             h5.card-title= product.name
                                 p.card-text= product.desciption
-                                a.btn.btn-primary(href='#') Buy
+                                a.btn.btn-primary(href='/cart/add/' + product.id) Buy
         form(action="", method="get").d-flex.justify-content-center.mt-5                       
             nav.d-flex.align-self-center(aria-label='Page navigation example')
                     ul.pagination

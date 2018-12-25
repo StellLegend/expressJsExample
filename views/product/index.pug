@@ -4,8 +4,8 @@ block content
     .container-fluid
         .d-flex.justify-content-between 
             h1 Products
-            form.form-inline.my-2.my-lg-0
-                input.form-control.mr-sm-2(type='search', placeholder='Search product')
+            form.form-inline.my-2.my-lg-0(action="/products/search", method="GET")
+                input.form-control.mr-sm-2(type='search',name='search', placeholder='Search product')
                 button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
 
         .row.mt-3
@@ -23,11 +23,11 @@ block content
                         li.page-item
                         button.page-link(name='page', value= num-1) Previous
                         li.page-item
-                        button.page-link(name='page', value= num)= num
-                        li.page-item
-                        button.page-link(name='page', value= num+1)= num+1
+                        button.page-link(name='page', value= num)= num+1
                         li.page-item
                         button.page-link(name='page', value= num+1)= num+2
+                        li.page-item
+                        button.page-link(name='page', value= num+1)= num+3
                         li.page-item
                         button.page-link(name='page', value= num+1) Next
 

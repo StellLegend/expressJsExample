@@ -5,6 +5,8 @@ const app = express();
 const port = 4000;
 
 var cookieParser = require('cookie-parser');
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_URL);
 
 const userRoute = require('./route/user.route');
 const homeRoute = require('./route/home.route');
@@ -25,4 +27,4 @@ app.use('/cart', cartRoute);
 app.use(express.static('public'));//static file
 
 app.listen(port, () => 
-    console.log(`Example app listening on port ${port}`));
+    console.log(`${port}`));

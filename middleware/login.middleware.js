@@ -1,17 +1,15 @@
-const db = require('../db');
+const User = require('../models/user.model');
 
-module.exports.loginAuth = (req, res, next) => {
+module.exports.loginAuth = async (req, res, next) => {
     if(!req.signedCookies.userID) {
         res.redirect('/auth/login');
         return;
     }
-
-    var idUser = db.get('users').find({id: req.signedCookies.userID}).value();
+    let idUser = await User.findById(req.signedCookies.userID);
     if(!idUser){
         res.redirect('/auth/login');
         return;
     }
-
-    res.locals.user = idUser;
+    res.locals.user = idUser.id;
     next();
 };

@@ -10,5 +10,5 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/login', loginCtrl.login);
 router.post('/login', loginCtrl.postLogin);
-
+router.get('/logout', loginCtrl.logout);
 module.exports = router;

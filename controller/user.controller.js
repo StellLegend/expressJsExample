@@ -1,16 +1,16 @@
-const db = require('../db');
-const shortid = require('shortid');
-module.exports.index = (req, res) => {
+const User = require('../models/user.model');
+const md5 = require('md5');
+var fs = require('fs');
+module.exports.index = async (req, res) =>{
+    let users = await User.find();
     res.render('users/index', {
-        users: db.get('users').value()//get value from db.json
+        users: users
     })
 };
-module.exports.search = (req, res) => {
-    var q = req.query.q; //get q attribute in url
-    
-    var matchUser = db.get('users').value().filter((user) => {//find q in users list
-        return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
-    });
+module.exports.search = async (req, res) => {
+    let q = req.query.q;
+    let inputSearch = "/" + req.query.q + "/i"
+    let matchUser = await User.find({name: inputSearch});
     res.render('users/index', {
         users: matchUser,// input : array
         input: q
@@ -19,16 +19,58 @@ module.exports.search = (req, res) => {
 module.exports.create = (req, res) => {
     res.render('users/create');
 };
-module.exports.getID = (req, res) => {
-    var userID = req.params.id;
-    var userInfo = db.get('users').find({id: userID}).value();
-    res.render('users/viewUser', {
-        info: userInfo.name
+module.exports.update = async (req, res) => {
+    let userID = req.params.id;
+    let userInfo = await User.findById(userID);
+    res.render('users/update', {
+        info: userInfo
     });
 };
-module.exports.postCreate = (req, res) => {
-    req.body.id = shortid.generate();
+module.exports.postUpdate = async (req, res) => {
     req.body.avatar = req.file.path.split('/').slice(1).join('/');
-    db.get('users').push(req.body).write();
+    let userUpdated = {
+        name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.newEmail,
+        password: md5(parseInt(req.body.newPassword)),
+        avatar: req.body.avatar
+    };
+    User.findByIdAndUpdate(req.body.id, userUpdated, {new: true}, (err) => {
+        if(err) return res.status(500).send(err);
+        return res.redirect('/users');
+    });
+
+};
+module.exports.getID = async (req, res) => {
+    let userID = req.params.id;
+    let userInfo = await User.findById(userID);
+    res.render('users/viewUser', {
+        info: userInfo
+    });
+};
+module.exports.postCreate = async (req, res) => {
+    req.body.avatar = req.file.path.split('/').slice(1).join('/');
+    let newUser = {
+        name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email,
+        password: md5(parseInt(req.body.password)),
+        avatar: req.body.avatar
+    };
+    let insertUser = new User(newUser);
+    insertUser.save((err) => {
+        if(err) console.log(err);
+    });
     res.redirect('/users');
 };
+module.exports.delete = async (req, res) => {
+    let userID = req.params.id;
+    let userInfo = await User.findById(userID);
+    User.findByIdAndRemove(userID, (err) => {
+        if(err) return res.status(500).send(err);
+        return res.status(200).redirect('/users');
+    });
+    fs.unlinkSync("public/" + userInfo.avatar, (err) => {
+        if(err) throw err;
+    })
+}
